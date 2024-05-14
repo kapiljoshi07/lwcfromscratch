@@ -1,0 +1,35 @@
+<template>
+  <lightning-card icon-name="utility:wellness" variant="brand" class="slds-var-m-around_medium">
+    <div slot="title" class="slds-align_absolute-center">
+      <h1>Guess My Number</h1>
+    </div>
+    <div slot="footer" class="right">
+      <lightning-button variant="brand" label="Again!" onclick={handleAgain}
+        class="slds-float_right slds-var-m-around_small slds-var-m-bottom_medium">
+      </lightning-button>
+    </div>
+    <div class="slds-var-m-around_large">
+      <!-- Card Body  -->
+      <header>
+        <p class="slds-text-align_right">(Between 1 and 20)</p>
+        <div class="slds-box slds-align_absolute-center slds-size_full number slds-var-m-around_medium">{getResult}
+        </div>
+      </header>
+      <section class="left">
+        <!-- <input type="number" class="guess" /> -->
+        <lightning-input type="number" name="check" label="" value={guessedNumber}
+          class="slds-var-m-around_medium guess" onchange={handleChange}></lightning-input>
+        <!-- <button class="btn check">Check!</button> -->
+        <lightning-button variant="success" label="Check!" onclick={handleCheck}
+          class="slds-var-m-around_medium"></lightning-button>
+      </section>
+      <section class="slds-var-m-around_large">
+        <p class="slds-var-m-around_medium right">{displayText}</p>
+        <p class="label-score">💯 Score: <span>{score}</span></p>
+        <p>
+          🥇 Highscore: <span>{highScore}</span>
+        </p>
+      </section>
+    </div>
+  </lightning-card>
+</template>
