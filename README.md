@@ -1,3 +1,5 @@
+# This project is to track my Salesforce Lightning Web Components learning
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
