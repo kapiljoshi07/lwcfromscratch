@@ -1,0 +1,18 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Compostion Contact Search
+    </div>
+    <div class="slds-var-m-around_small">
+      <!-- Card Body  -->
+      <lightning-input type="text" label="Search" onchange={handleChange}></lightning-input>
+      <div lwc:if={contactList}>
+        <template for:each={contactList} for:item="contact">
+          <div key={contact.id} class="slds-var-m-around_medium">
+            <c-contact-tile contact={contact}></c-contact-tile>
+          </div>
+        </template>
+      </div>
+    </div>
+  </lightning-card>
+</template>

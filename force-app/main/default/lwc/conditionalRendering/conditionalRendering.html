@@ -1,0 +1,14 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Conditional Rendering
+    </div>
+    <div class="slds-var-m-around_small">
+      <!-- Card Body  -->
+      <lightning-input type="checkbox" label="Show Details" onchange={handleChange}></lightning-input>
+      <template lwc:if={isChecked}>
+        <p class="slds-var-m-around_medium">These are the details</p>
+      </template>
+    </div>
+  </lightning-card>
+</template>
