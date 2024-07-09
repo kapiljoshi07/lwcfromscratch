@@ -1,0 +1,13 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Expressions
+    </div>
+    <div class="slds-var-m-around_small">
+      <!-- Card Body  -->
+      <lightning-input type="text" label="First Name" value={firstName} onchange={handleChange}></lightning-input>
+      <lightning-input type="text" label="Last Name" value={lastName} onchange={handleChange}></lightning-input>
+      <p class="slds-var-m-around_medium">UPPERCASE FULLNAME: {upperCaseName}</p>
+    </div>
+  </lightning-card>
+</template>

@@ -1,0 +1,8 @@
+<template>
+  <template lwc:if={contact}>
+    <img src={contact.picture} alt="Contact Image">
+    <p>{contact.name}</p>
+    <p>{contact.title}</p>
+    <lightning-formatted-phone value={contact.phone}></lightning-formatted-phone>
+  </template>
+</template>
