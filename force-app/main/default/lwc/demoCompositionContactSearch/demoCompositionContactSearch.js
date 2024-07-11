@@ -21,7 +21,6 @@ export default class DemoCompositionContactSearch extends LightningElement {
   handleChange(event){
     this.searchText = event.target.value;
     this.contactList = this.findContacts(this.searchText);
-    console.log(JSON.stringify(this.contactList));
   }
 
 }
