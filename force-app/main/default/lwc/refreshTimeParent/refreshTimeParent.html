@@ -1,0 +1,14 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Parent-to-Child Communication
+    </div>
+    <div class="slds-var-m-around_medium slds-align_absolute-center">
+      <!-- Card Body  -->
+      <lightning-button variant="base" label="Refresh Time" onclick={handleClick}></lightning-button>
+    </div>
+    <div class="slds-align_absolute-center slds-var-m-around_small">
+      <c-refresh-time-child></c-refresh-time-child>
+    </div>
+  </lightning-card>
+</template>
