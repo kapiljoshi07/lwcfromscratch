@@ -1,0 +1,15 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Parent-to-Child communication
+    </div>
+    <div class="slds-var-m-around_small">
+      <!-- Card Body  -->
+      <div class="slds-var-m-around_medium">
+        <lightning-input type="number" label="Enter Percentage" value={percentage} min=0 max=100
+          onkeyup={handleChange}></lightning-input>
+      </div>
+      <c-progress-bar-child percentage={percentage}></c-progress-bar-child>
+    </div>
+  </lightning-card>
+</template>
