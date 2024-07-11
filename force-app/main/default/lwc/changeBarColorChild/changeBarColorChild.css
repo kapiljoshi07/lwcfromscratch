@@ -1,0 +1,14 @@
+div{
+  border: 1px solid black;
+  padding: 4px;
+  margin: 5px;
+  color: white;
+  text-align: center;
+}
+.redBar{
+  background-color: red;
+}
+
+.greenBar{
+  background-color: darkgreen;
+}
