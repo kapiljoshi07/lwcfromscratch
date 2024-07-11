@@ -1,0 +1,22 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      SIGN IN PAGE
+    </div>
+    <div slot="footer">
+      <div>
+        <lightning-button variant="destructive" label="Back" name="back" onclick={handleSubmit}
+          class="slds-var-m-around_medium"></lightning-button>
+        <lightning-button variant="success" label="Log In" name="loggedin" onclick={handleSubmit}
+          class="slds-var-m-around_medium"></lightning-button>
+      </div>
+    </div>
+    <div class="slds-var-m-around_small slds-align_absolute-center">
+      <!-- Card Body  -->
+      <div>
+        <lightning-input type="text" label="Enter Username"></lightning-input>
+        <lightning-input type="password" label="Enter Password"></lightning-input>
+      </div>
+    </div>
+  </lightning-card>
+</template>
