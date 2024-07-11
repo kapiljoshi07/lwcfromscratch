@@ -1,0 +1,21 @@
+p{
+  margin: 5px;
+  padding: 2px;
+  color: white;
+}
+
+.success{
+  background-color: darkgreen;
+}
+
+.info{
+  background-color: blue;
+}
+
+.error{
+  background-color: red;
+}
+
+.warning{
+  background-color: orange;
+}
