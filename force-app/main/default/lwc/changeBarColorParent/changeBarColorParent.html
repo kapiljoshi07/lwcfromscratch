@@ -1,0 +1,14 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Parent-to-Child Communication: querySelector
+    </div>
+    <div class="slds-align_absolute-center">
+      <!-- Card Body  -->
+      <div class="barparent slds-text-align_center" onclick={handleClick}>
+        Click me to change Bar Color
+      </div>
+    </div>
+    <c-change-bar-color-child></c-change-bar-color-child>
+  </lightning-card>
+</template>
