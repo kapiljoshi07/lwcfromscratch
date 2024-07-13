@@ -1,0 +1,12 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo on Events
+    </div>
+    <div class="slds-var-m-around_small slds-align_absolute-center">
+      <!-- Card Body  -->
+      <p>Page {pageNo}</p>
+    </div>
+    <c-paginator-child onprev={handlePrev} onnext={handleNext}></c-paginator-child>
+  </lightning-card>
+</template>
