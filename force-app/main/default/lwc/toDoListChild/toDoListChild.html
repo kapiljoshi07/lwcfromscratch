@@ -1,0 +1,16 @@
+<template>
+  <div class="slds-var-m-around_small">
+    <div class="slds-var-m-around_small">
+      <lightning-input type="checkbox" label="Priority Only" name="filter" checked={applyFilter}
+        onchange={handleChange}></lightning-input>
+    </div>
+    <div>
+      <template for:each={filteredItems} for:item="it">
+        <div key={it.id} class="giveBorder">
+          <p>{it.item}</p>
+          <p>Priority: {it.priority}</p>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>
