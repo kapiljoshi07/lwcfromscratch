@@ -1,0 +1,20 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Api Getter Setter
+    </div>
+    <div class="slds-var-m-around_small">
+      <!-- Card Body  -->
+      <div class="slds-var-m-around_small"><lightning-input type="text" label="Description" name="desc"
+          value={description} onchange={handleChange}></lightning-input>
+      </div>
+      <div class="slds-var-m-around_small"><lightning-input type="checkbox" label="Priority" name="flag"
+          checked={isPriority} onchange={handleChange}></lightning-input>
+      </div>
+      <div class="slds-align_absolute-center">
+        <lightning-button variant="brand-outline" label="Add To Do" onclick={handleClick}></lightning-button>
+      </div>
+    </div>
+    <c-to-do-list-child to-do-list={toDoList}></c-to-do-list-child>
+  </lightning-card>
+</template>
