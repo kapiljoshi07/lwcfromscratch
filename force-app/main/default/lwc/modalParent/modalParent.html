@@ -1,0 +1,19 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Events Simple
+    </div>
+    <div class="slds-var-m-around_medium">
+      <!-- Card Body  -->
+      THIS IS PARENT COMPONENT
+      <span class="slds-text-align_right slds-var-m-around_large"><lightning-button variant="base" label="Show Modal"
+          onclick={showModal}></lightning-button></span>
+    </div>
+    <div lwc:if={openModal}>
+      <c-modal-child header-text="Good Morning!"
+        message-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus integer feugiat scelerisque varius morbi enim nunc. Vulputate ut pharetra sit amet. Lectus quam id leo in vitae. Pellentesque massa placerat duis ultricies lacus sed turpis. Varius quam quisque id diam vel quam elementum. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae. Ut sem viverra aliquet eget sit. Eget nullam non nisi est sit amet. Facilisis volutpat est velit egestas dui id ornare arcu. Eu feugiat pretium nibh ipsum. Commodo elit at imperdiet dui. Ultrices dui sapien eget mi proin sed libero. Semper auctor neque vitae tempus quam pellentesque nec nam aliquam."
+        onmodalclose={closeModal}>
+      </c-modal-child>
+    </div>
+  </lightning-card>
+</template>
