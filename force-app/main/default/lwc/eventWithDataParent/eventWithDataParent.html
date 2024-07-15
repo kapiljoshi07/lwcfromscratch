@@ -1,0 +1,27 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Demo Events with data
+    </div>
+    <div lwc:if={isContactList}>
+      <!-- Card Body  -->
+      <div class="slds-grid">
+        <div class="slds-col slds-size_2-of-3">
+          <template for:each={contactList} for:item="contact">
+            <c-event-with-data-child key={contact.id} contact={contact}
+              onselected={handleContactSelect}></c-event-with-data-child>
+          </template>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <template lwc:if={contact}>
+            <img src={contact.picture} alt="Profile Photo">
+            <p>{contact.name}</p>
+            <p>{contact.title}</p>
+            <p><lightning-formatted-phone value={contact.phone}></lightning-formatted-phone></p>
+            <lightning-formatted-email value={contact.email} hide-icon="false" label=""></lightning-formatted-email>
+          </template>
+        </div>
+      </div>
+    </div>
+  </lightning-card>
+</template>
