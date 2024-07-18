@@ -32,7 +32,7 @@ export default class GuessMyNumber extends LightningElement {
         this.checkBtn.disabled = true
         this.inputField.disabled = true;
       }
-    }else{
+    }else if(this.randomNumber === Number(this.guessedNumber)){
       this.textMessage = '🏆Correct Answer!';
       this.results = this.randomNumber;
       if(this.highScore < this.score)
