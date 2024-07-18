@@ -19,12 +19,19 @@ export default class GuessMyNumber extends LightningElement {
 
   checkNumber(event){
     this.checkBtn = event.target;
-    if(this.randomNumber > this.guessedNumber){
-      this.textMessage = '⬇️Too Low!';
+    if(this.randomNumber !== Number(this.guessedNumber)){
       this.score--;
-    }else if(this.randomNumber < this.guessedNumber){
-      this.textMessage = '⬆️Too High!';
-      this.score--;
+      if(this.score > 0){
+        if(this.randomNumber > this.guessedNumber){
+          this.textMessage = '⬇️Too Low!';
+        }else if(this.randomNumber < this.guessedNumber){
+          this.textMessage = '⬆️Too High!';
+        }
+      }else{
+        this.textMessage = '🥲YOU LOSE!!';
+        this.checkBtn.disabled = true
+        this.inputField.disabled = true;
+      }
     }else{
       this.textMessage = '🏆Correct Answer!';
       this.results = this.randomNumber;
