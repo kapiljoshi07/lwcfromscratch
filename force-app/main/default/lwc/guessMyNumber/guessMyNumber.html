@@ -1,0 +1,41 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      Guess My Number
+    </div>
+    <div slot="footer" class="slds-text-align_right">
+      <lightning-button variant="brand" label="Again!" onclick={resetGame}></lightning-button>
+    </div>
+    <div>
+      <header class="slds-var-m-around_small">
+        <p class="slds-text-align_right">(Between 1 and 20)</p>
+      </header>
+      <!-- Card Body  -->
+      <div class="slds-grid slds-gutters slds-var-m-around_small">
+        <div class="slds-col slds-size_1-of-3">
+          <div class="slds-box slds-align_absolute-center number slds-var-m-around_medium">
+            {getResults}
+          </div>
+        </div>
+        <div class="slds-col slds-size_2-of-3">
+          <div class="slds-var-m-around_small">
+            <lightning-input type="number" min="1" max="20" value={guessedNumber}
+              onchange={handleChange}></lightning-input>
+          </div>
+          <div class="slds-var-m-around_small slds-align_absolute-center">
+            <lightning-button variant="success" label="Check!" onclick={checkNumber}></lightning-button>
+          </div>
+        </div>
+      </div>
+      <div class="slds-var-m-around_large">
+        {textMessage}
+      </div>
+      <div class="slds-var-m-around_large">
+        <h4>💯Score: {score}</h4>
+      </div>
+      <div class="slds-var-m-around_large">
+        <h4>🔝Highest Score: {highScore}</h4>
+      </div>
+    </div>
+  </lightning-card>
+</template>
