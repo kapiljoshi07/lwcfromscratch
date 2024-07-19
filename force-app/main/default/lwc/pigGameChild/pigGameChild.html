@@ -1,0 +1,31 @@
+<template>
+  <div class="modal">
+    <div class="modal-content body">
+      <div class="main">
+        <section class="player player--active" data-player-id="player--1">
+          <h2 class="name">{playerOne}</h2>
+          <p class="score">{getScoreOne}</p>
+          <div class="current">
+            <p class="current-label">{current}</p>
+            <p class="current-score">{getCurrentScoreOne}</p>
+          </div>
+        </section>
+        <section class="player" data-player-id="player--2">
+          <h2 class="name">{playerTwo}</h2>
+          <p class="score">{getScoreTwo}</p>
+          <div class="current">
+            <p class="current-label">{current}</p>
+            <p class="current-score">{getCurrentScoreTwo}</p>
+          </div>
+        </section>
+        <img src={getDiceImg} alt="Playing dice" class="dice">
+        <button class="btn btn--new" onclick={newGame}>🔄 New game</button>
+        <button class="btn btn--roll" onclick={rollDice}>🎲 Roll dice</button>
+        <button class="btn btn--hold" onclick={holdScore}>📥 Hold</button>
+      </div>
+      <footer class="slds-text-align_right slds-var-m-around_large">
+        <lightning-button variant="base" label="Close Game" onclick={closeHandler} class="ftr"></lightning-button>
+      </footer>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,24 @@
+<template>
+  <lightning-card>
+    <div slot="title">
+      PIG GAME
+    </div>
+    <div>
+      <!-- Card Body  -->
+      <div class="slds-grid slds-gutters slds-var-m-around_small">
+        <div class="slds-col slds-size_2-of-3 slds-var-m-around_small">
+          <lightning-input type="text" label="Player One" value={playerOneName} name="playerOne"
+            onchange={handleChange}></lightning-input>
+          <lightning-input type="text" label="Player Two" value={playerTwoName} name="playerTwo"
+            onchange={handleChange}></lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-var-m-around_xx-small slds-align_absolute-center">
+          <lightning-button variant="brand" label="Start Game" onclick={startGame}></lightning-button>
+        </div>
+      </div>
+      <template lwc:if={gameOn}>
+        <c-pig-game-child player-one={playerOneName} player-two={playerTwoName} onclose={endGame}></c-pig-game-child>
+      </template>
+    </div>
+  </lightning-card>
+</template>
