@@ -9,7 +9,7 @@ export default class PigGameChild extends LightningElement {
   scoreTwo;
   currentScoreOne;
   currentScoreTwo;
-  rendered;
+  hasRendered;
   diceImg;
   currentplayer;
   
@@ -17,7 +17,7 @@ export default class PigGameChild extends LightningElement {
   constructor(){
     super();
     this.current = "Current";
-    this.rendered = false;
+    this.hasRendered = false;
     this.diceImg = `${DICE_IMAGES}/dice-1.png`;
   }
 
