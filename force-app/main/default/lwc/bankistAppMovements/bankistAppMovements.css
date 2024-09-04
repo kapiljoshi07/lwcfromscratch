@@ -1,0 +1,34 @@
+.movements{
+  grid-row: 2 / span 3;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.movements__row{
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.movements__type{
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #fff;
+  padding: 0.4px 4px;
+  border-radius: 35px;
+  margin-right: 8px;
+}
+
+.movements__type--deposit{
+  background-image: linear-gradient(to top left, #39b385, #9be15d);
+}
+
+.movements__type--withdrawal{
+  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+}
+
+.movements__value{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode'; 
+  font-weight: 700;
+  margin-left: auto;
+}

@@ -1,0 +1,17 @@
+<template>
+  <template lwc:if={showClosingAccountPanel}>
+    <lightning-card>
+      <div slot="title" class="slds-var-m-around_medium">
+        Close Account
+      </div>
+      <div class="slds-align_absolute-center slds-var-m-around_medium">
+        <!-- Card Body  -->
+        <lightning-input type="text" label="Confirm Username" value={username} onchange={handleChange} name="username"
+          class="slds-var-m-around_small"></lightning-input>
+        <lightning-input type="password" label="Enter pin" value={pin} onchange={handleChange} name="userpin"
+          class="slds-var-m-around_small"></lightning-input>
+        <button class="form__btn form__btn--transfer slds-var-m-top_medium" onclick={closeAccount}>&rarr;</button>
+      </div>
+    </lightning-card>
+  </template>
+</template>

@@ -1,0 +1,17 @@
+<template>
+  <template lwc:if={showTransferPanel}>
+    <lightning-card>
+      <div slot="title" class="slds-var-m-around_medium">
+        Transfer Money
+      </div>
+      <div class="slds-align_absolute-center slds-var-m-around_medium">
+        <!-- Card Body  -->
+        <lightning-input type="text" label="Transfer To" value={recipientUsername} onchange={handleChange}
+          name="recipientUsername" class="slds-var-m-around_small"></lightning-input>
+        <lightning-input type="number" label="Amount" value={transferAmount} onchange={handleChange}
+          name="transferAmount" class="slds-var-m-around_small"></lightning-input>
+        <button class="form__btn form__btn--transfer slds-var-m-top_medium" onclick={handleTransfer}>&rarr;</button>
+      </div>
+    </lightning-card>
+  </template>
+</template>
