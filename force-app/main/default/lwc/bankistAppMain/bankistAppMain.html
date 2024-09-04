@@ -1,0 +1,54 @@
+<template>
+  <!-- Main Page -->
+  <div class="mainpage">
+    <div class="slds-var-m-bottom_medium slds-var-m-left_medium welcome slds-grid">
+      <div class="slds-col slds-col_bump-{right}">
+        Greetings of the day, {ownerName}!
+      </div>
+      <div class="slds-col slds-text-align_right slds-var-m-right_medium slds-var-m-bottom_medium">
+        <lightning-button-icon icon-name="utility:power" alternative-text="Sign Out" size="large" type="button"
+          variant="container" onclick={handleSignOut} class="slds-button_icon-large"></lightning-button-icon>
+      </div>
+    </div>
+    <!-- Balance -->
+    <div class="slds-var-m-around_medium">
+      <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_2-of-3">
+          <p class="balance__label">Current balance</p>
+          <p class="balance__date">
+            As of <span>{todayDate}</span>
+          </p>
+        </div>
+        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+          <p class="balance__value">{currentBalance}€</p>
+        </div>
+      </div>
+    </div>
+    <!-- Transaction Entries -->
+    <template for:each={movements} for:item="movement" for:index="index">
+      <div key={movement.movId} class="slds-var-m-horizontal_medium slds-var-m-vertical_xxx-small">
+        <c-bankist-app-movements movement={movement.movVal} index={index}></c-bankist-app-movements>
+      </div>
+    </template>
+    <!-- Footer Content : INs OUTs and Interest -->
+    <div class="slds-var-m-around_medium">
+      <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+          <p class="summary__label">In</p>
+          <p class="summary__value--in">{accountDeposits}€</p>
+        </div>
+        <div class="slds-col">
+          <p class="summary__label">Out</p>
+          <p class="summary__value--out">{accountWithdrawals}€</p>
+        </div>
+        <div class="slds-col">
+          <p class="summary__label">Interest</p>
+          <p class="summary__value--interest">{accountInterest}€</p>
+        </div>
+        <div class="slds-col slds-text-align_right">
+          <button class="btn--sort">&downarrow; SORT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

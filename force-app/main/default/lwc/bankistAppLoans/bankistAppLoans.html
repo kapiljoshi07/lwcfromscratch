@@ -1,0 +1,15 @@
+<template>
+  <template lwc:if={showLoanPanel}>
+    <lightning-card>
+      <div slot="title" class="slds-var-m-around_medium">
+        Request Loan
+      </div>
+      <div class="slds-align_absolute-center slds-var-m-around_medium">
+        <!-- Card Body  -->
+        <lightning-input type="number" label="Amount" value={loanAmount} onchange={handleChange}
+          class="slds-var-m-around_small"></lightning-input>
+        <button class="form__btn form__btn--transfer slds-var-m-top_medium" onclick={requestLoan}>&rarr;</button>
+      </div>
+    </lightning-card>
+  </template>
+</template>

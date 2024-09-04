@@ -1,0 +1,17 @@
+.form__btn {
+  border: none;
+  border-radius: 0.7rem;
+  font-size: 1.8rem;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.form__btn:focus {
+  outline: none;
+}
+
+.form__btn:active {
+  transform: translate(-25%, 3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

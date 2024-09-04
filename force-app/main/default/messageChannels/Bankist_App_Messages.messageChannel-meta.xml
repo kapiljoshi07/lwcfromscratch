@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message Channel to pass a Lightning Message Service Data</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Lightning Message Service Data</description>
+        <fieldName>lmsData</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Type of Lightning Message Service Data</description>
+        <fieldName>lmsType</fieldName>
+    </lightningMessageFields>
+    <masterLabel>BankistAppMessages</masterLabel>
+</LightningMessageChannel>

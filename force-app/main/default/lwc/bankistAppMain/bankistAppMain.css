@@ -1,0 +1,60 @@
+/* :host{
+  --slds-c-button_icon-sizing: 50px
+} */
+
+.mainpage{
+  font-family: "Poppins", sans-serif;
+  color: #003049;
+  background-color: #fffcf2;
+  border-radius: 10px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.welcome {
+  font-size: 1.9rem;
+  font-weight: 500;
+}
+
+.balance__label{
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: -0.2rem;
+}
+
+.balance__date{
+  font-size: 15px;
+  color: #888;
+}
+
+.balance__value{
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.summary__label {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.summary__value--in,
+.summary__value--interest {
+  color: #66c873;
+}
+
+.summary__value--out {
+  color: #f5465d;
+}
+
+.btn--sort {
+  border: none;
+  background: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn--sort:active {
+  transform: translate(-25%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
