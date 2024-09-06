@@ -19,6 +19,7 @@ export default class BankistAppMain extends LightningElement {
   _accountInterest = 0;
   _ownerName = '';
   _message = null;
+  _sort = false;
   subscription = null;
   @track accounts = accounts;
   @track _userAccount = {};
@@ -84,8 +85,17 @@ export default class BankistAppMain extends LightningElement {
     this._message = val;
   }
 
+  get sort(){
+    return this._sort;
+  }
+  set sort(val){
+    this._sort = val;
+  }
+
   get movements(){
-    return this._userAccount['movements'];
+    //return this._userAccount['movements'];
+    const movements = this._userAccount['movements'].slice();
+    return this.sort ? movements.sort((a, b) => a.movVal - b.movVal) : movements;
   }
 
   get todayDate(){
@@ -289,6 +299,10 @@ export default class BankistAppMain extends LightningElement {
         message: `You are not eligible for loan of amount ${loanAmount} EUR`
       });
     }
+  }
+
+  handleSort(){
+    this.sort = !this.sort;
   }
 
   verifyCredentials(usrName, pwd){
