@@ -1,4 +1,5 @@
 import { LightningElement, wire } from 'lwc';
+import  LightningAlert from 'lightning/alert';
 import {subscribe, unsubscribe, APPLICATION_SCOPE, MessageContext, publish} from 'lightning/messageService';
 import bankistAppMessageService from '@salesforce/messageChannel/Bankist_App_Messages__c';
 
@@ -57,7 +58,15 @@ export default class BankistAppLoans extends LightningElement {
         amount: this.loanAmount
       }
     }
-    publish(this.messageContext, bankistAppMessageService, payload);
+    if(!Number.isFinite(+this.loanAmount) || +this.loanAmount === 0){
+      LightningAlert.open({
+        label: "Loan Error",
+        theme: "error",
+        message: "Please enter a valid loan amount!"
+      })
+    }else{
+      publish(this.messageContext, bankistAppMessageService, payload);
+    }
     this.loanAmount = "";
   }
 

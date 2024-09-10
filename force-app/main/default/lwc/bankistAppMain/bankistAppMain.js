@@ -20,6 +20,7 @@ export default class BankistAppMain extends LightningElement {
   _ownerName = '';
   _message = null;
   _sort = false;
+  _locale = null;
   subscription = null;
   @track accounts = accounts;
   @track _userAccount = {};
@@ -92,6 +93,10 @@ export default class BankistAppMain extends LightningElement {
     this._sort = val;
   }
 
+  get locale(){
+    return this._userAccount["locale"];
+  }
+
   get movements(){
     //return this._userAccount['movements'];
     const movements = this._userAccount['movements'].slice();
@@ -99,8 +104,17 @@ export default class BankistAppMain extends LightningElement {
   }
 
   get todayDate(){
-    const dt = new Date();
-    return `${dt.getDate()}/${dt.getMonth()+1}/${dt.getFullYear()}`;
+    const now = new Date();
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      weekday: "long"
+    }
+    const dateText = new Intl.DateTimeFormat(this._userAccount['locale'], options).format(now);
+    return dateText;
   }
 
   constructor(){
@@ -181,7 +195,7 @@ export default class BankistAppMain extends LightningElement {
       }else if(this.message["lmsType"] === "loan"){
         console.log(`INSIDE bankistAppMain requestLoan logic`);
         const requesterAcc = this.findAccountFromAccountJS(this.message["lmsData"].owner);
-        this.handleLoan(requesterAcc,Number(this.message["lmsData"].amount));
+        this.handleLoan(requesterAcc,Math.floor(this.message["lmsData"].amount));
       }else if(this.message["lmsType"] === "closeAccount"){
         console.log(`INSIDE bankistAppMain closeAccount logic`);
         this.handleAccountClosure();
@@ -203,29 +217,33 @@ export default class BankistAppMain extends LightningElement {
     this.loggedIn = false;
     this.publishMessagesToApp(false);
     this.username = this.password = "";
+    this._userAccount = null;
   }
 
   handleAmountTransfer(){
     try{
       let receiverAccount = null;
       let senderAccount = null;
+      let todayDate = new Date();
       if(this.findAccountFromAccountJS(this.message["lmsData"].receiver)){
         receiverAccount = JSON.parse(JSON.stringify(this.findAccountFromAccountJS(this.message["lmsData"].receiver)));
       }
       if(this.findAccountFromAccountJS(this.message["lmsData"].sender)){
         senderAccount = JSON.parse(JSON.stringify(this.findAccountFromAccountJS(this.message["lmsData"].sender)));
       }
-      const transferAmount = this.message["lmsData"].amount;
-      const transactionid = this.message["lmsData"].transactionid;
+      const transferAmount = Number(this.message["lmsData"].amount);
+      const transactionid = todayDate.getTime();
       if(transferAmount < this.currentBalance){
         if(receiverAccount){
           receiverAccount['movements'].push({
             movId: transactionid,
-            movVal: transferAmount
+            movVal: transferAmount,
+            movDate: todayDate.toISOString()
           });
           senderAccount['movements'].push({
             movId: transactionid,
-            movVal: -transferAmount
+            movVal: -transferAmount,
+            movDate: todayDate.toISOString()
           });          
           this._userAccount = senderAccount;
           LightningAlert.open({
@@ -278,12 +296,14 @@ export default class BankistAppMain extends LightningElement {
     const loanee = JSON.parse(JSON.stringify(acc));
     const movements = loanee.movements;
     const movVal = [];
+    const todayDate = new Date();
     movements.forEach( m => movVal.push(m.movVal));
     if(loanAmount > 0 && movVal.some( mov => mov > loanAmount * 0.1)){
-      const transactionId = `${new Date().getTime()}loan`;
+      const transactionId = `${todayDate.getTime()}loan`;
       loanee.movements.push({
         movId: transactionId,
-        movVal: loanAmount
+        movVal: loanAmount,
+        movDate: todayDate.toISOString()
       });
       LightningAlert.open({
         label: "Loan Information",

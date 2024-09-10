@@ -74,7 +74,7 @@ export default class BankistAppTransfers extends LightningElement {
     const dt = new Date().getTime();
     const payload = {
       lmsData:{
-        sender: sender, receiver: receiver, amount: amount, transactionid: `${dt}${sender}${receiver}` 
+        sender: sender, receiver: receiver, amount: amount 
       },
       lmsType: "amountTransfer"
     }

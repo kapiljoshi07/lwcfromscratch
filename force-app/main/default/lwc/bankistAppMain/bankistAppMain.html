@@ -27,7 +27,7 @@
     <!-- Transaction Entries -->
     <template for:each={movements} for:item="movement" for:index="index">
       <div key={movement.movId} class="slds-var-m-horizontal_medium slds-var-m-vertical_xxx-small">
-        <c-bankist-app-movements movement={movement.movVal} index={index}></c-bankist-app-movements>
+        <c-bankist-app-movements movement={movement} index={index} locale={locale}></c-bankist-app-movements>
       </div>
     </template>
     <!-- Footer Content : INs OUTs and Interest -->
