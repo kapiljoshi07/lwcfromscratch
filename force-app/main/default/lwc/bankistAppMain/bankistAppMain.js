@@ -21,6 +21,7 @@ export default class BankistAppMain extends LightningElement {
   _message = null;
   _sort = false;
   _locale = null;
+  _localCurrency = null;
   subscription = null;
   @track accounts = accounts;
   @track _userAccount = {};
@@ -52,26 +53,38 @@ export default class BankistAppMain extends LightningElement {
   get currentBalance(){
     const movValArr = [];
     this._userAccount['movements'].forEach( mov => movValArr.push(mov.movVal));
-    return movValArr.reduce((acu, cur) => acu+cur, 0);
+    return new Intl.NumberFormat(this.locale, {
+      style: 'currency',
+      currency: this.localCurrency
+    }).format(movValArr.reduce((acu, cur) => acu+cur, 0));
   }
 
   get accountDeposits(){
     const mov = this.movements;
     const movVal = mov.map(x => x['movVal']);
-    return Math.abs(movVal.filter(x => x > 0).reduce((acc, curr) => acc+curr, 0));
+    return new Intl.NumberFormat(this.locale, {
+      style: 'currency',
+      currency: this.localCurrency
+    }).format(Math.abs(movVal.filter(x => x > 0).reduce((acc, curr) => acc+curr, 0)));
   }
 
   get accountWithdrawals(){
     const mov = this.movements;
     const movVal = mov.map(x => x['movVal']);
-    return Math.abs(movVal.filter(x => x<0).reduce((acc, curr)=>acc+curr, 0));
+    return new Intl.NumberFormat(this.locale, {
+      style: 'currency',
+      currency: this.localCurrency
+    }).format(Math.abs(movVal.filter(x => x<0).reduce((acc, curr)=>acc+curr, 0)));
   }
 
   get accountInterest(){
     const interest = this._userAccount['interestRate'];
     const mov = this.movements;
     const movVal = mov.map(x => x['movVal']);
-    return movVal.filter(x => x>0).map(dep => dep*interest/100).reduce((acc, curr)=>acc+curr, 0);
+    return new Intl.NumberFormat(this.locale, {
+      style: 'currency',
+      currency: this.localCurrency
+    }).format(movVal.filter(x => x>0).map(dep => dep*interest/100).reduce((acc, curr)=>acc+curr, 0));
   }
 
   get ownerName(){
@@ -95,6 +108,10 @@ export default class BankistAppMain extends LightningElement {
 
   get locale(){
     return this._userAccount["locale"];
+  }
+
+  get localCurrency(){
+    return this._userAccount["currency"];
   }
 
   get movements(){
