@@ -4,7 +4,8 @@ export default class BankistAppMovements extends LightningElement {
 
   @api movement;
   @api index;
-  @api locale
+  @api locale;
+  @api localCurrency;
 
   get movementType(){
     return this.movement.movVal > 0 ? 'movements__type movements__type--deposit' : 'movements__type movements__type--withdrawal'; 
@@ -15,7 +16,10 @@ export default class BankistAppMovements extends LightningElement {
   }
 
   get getMovementVal(){
-    return Math.abs(this.movement.movVal);
+    return new Intl.NumberFormat(this.locale, {
+      style: 'currency',
+      currency: this.localCurrency
+    }).format(Math.abs(this.movement.movVal));
   }
 
   get getMovementDate(){
