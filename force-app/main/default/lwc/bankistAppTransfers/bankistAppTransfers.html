@@ -8,8 +8,8 @@
         <!-- Card Body  -->
         <lightning-input type="text" label="Transfer To" value={recipientUsername} onchange={handleChange}
           name="recipientUsername" class="slds-var-m-around_small"></lightning-input>
-        <lightning-input type="number" label="Amount" value={transferAmount} onchange={handleChange}
-          name="transferAmount" class="slds-var-m-around_small"></lightning-input>
+        <lightning-input type="text" label="Amount" value={transferAmount} onchange={handleChange} name="transferAmount"
+          class="slds-var-m-around_small"></lightning-input>
         <button class="form__btn form__btn--transfer slds-var-m-top_medium" onclick={handleTransfer}>&rarr;</button>
       </div>
     </lightning-card>
