@@ -13,7 +13,7 @@ export default class BankistAppMain extends LightningElement {
   _loggedIn = false;
   _username = '';
   _password = '';
-  _currentBalance = 0;
+  _currentBalanceAmount = 0;
   _accountDeposits = 0;
   _accountWithdrawals = 0;
   _accountInterest = 0;
@@ -22,6 +22,8 @@ export default class BankistAppMain extends LightningElement {
   _sort = false;
   _locale = null;
   _localCurrency = null;
+  _timer = null;
+  _displayTimer = "";
   subscription = null;
   @track accounts = accounts;
   @track _userAccount = {};
@@ -50,13 +52,21 @@ export default class BankistAppMain extends LightningElement {
     this._password = val;
   }
 
+  get currentBalanceAmount(){
+    return this._currentBalanceAmount;
+  }
+  set currentBalanceAmount(val){
+    this._currentBalanceAmount = val;
+  }
+
   get currentBalance(){
     const movValArr = [];
     this._userAccount['movements'].forEach( mov => movValArr.push(mov.movVal));
+    this.currentBalanceAmount = movValArr.reduce((acu, cur) => acu+cur, 0);
     return new Intl.NumberFormat(this.locale, {
       style: 'currency',
       currency: this.localCurrency
-    }).format(movValArr.reduce((acu, cur) => acu+cur, 0));
+    }).format(this.currentBalanceAmount);
   }
 
   get accountDeposits(){
@@ -112,6 +122,20 @@ export default class BankistAppMain extends LightningElement {
 
   get localCurrency(){
     return this._userAccount["currency"];
+  }
+
+  get timer(){
+    return this._timer;
+  }
+  set timer(val){
+    this._timer = val;
+  }
+
+  get displayTimer(){
+    return this._displayTimer;
+  }
+  set displayTimer(val){
+    this._displayTimer = val;
   }
 
   get movements(){
@@ -185,6 +209,8 @@ export default class BankistAppMain extends LightningElement {
     if(this.username && this.password){
       this._userAccount = this.verifyCredentials(this.username, this.password);
       if(this._userAccount){
+        if(this.timer) clearInterval(this.timer);
+        this.timer = this.handleTimer();
         this.loggedIn = true;
         this.publishMessagesToApp(true);
       }else{
@@ -193,7 +219,7 @@ export default class BankistAppMain extends LightningElement {
         theme: 'error',
         label: "Login Error!",
       });
-      this.username = this.password = '';
+        this.username = this.password = '';
       }
     }else{
       LightningAlert.open({
@@ -235,6 +261,9 @@ export default class BankistAppMain extends LightningElement {
     this.publishMessagesToApp(false);
     this.username = this.password = "";
     this._userAccount = null;
+    clearInterval(this.timer);
+    this.timer = null;
+    this.displayTimer = "";
   }
 
   handleAmountTransfer(){
@@ -250,7 +279,8 @@ export default class BankistAppMain extends LightningElement {
       }
       const transferAmount = Number(this.message["lmsData"].amount);
       const transactionid = todayDate.getTime();
-      if(transferAmount < this.currentBalance){
+      console.log(transferAmount, this.currentBalance);
+      if(transferAmount < this.currentBalanceAmount){
         if(receiverAccount){
           receiverAccount['movements'].push({
             movId: transactionid,
@@ -270,6 +300,8 @@ export default class BankistAppMain extends LightningElement {
           })
           this.updateAccountObject(senderAccount);
           this.updateAccountObject(receiverAccount);
+          if(this.timer) clearInterval(this.timer);
+          this.timer = this.handleTimer();
         }else{
           LightningAlert.open({
             message: `Cannot locate the receiver '${this.message['lmsData'].receiver}' account. Please check username and try again.`,
@@ -279,7 +311,7 @@ export default class BankistAppMain extends LightningElement {
         }
       }else{
         LightningAlert.open({
-          message: `Not enough balance. Current balance ${this.currentBalance} EUR`,
+          message: `Not enough balance. Current balance ${this.currentBalance}`,
           theme: "error",
           label: "Transfer Error!"
         })
@@ -329,6 +361,8 @@ export default class BankistAppMain extends LightningElement {
       });
       this._userAccount = loanee;
       this.updateAccountObject(loanee);
+      if(this.timer) clearInterval(this.timer);
+      this.timer = this.handleTimer();
     }else{
       LightningAlert.open({
         label: "Loan Information",
@@ -340,6 +374,32 @@ export default class BankistAppMain extends LightningElement {
 
   handleSort(){
     this.sort = !this.sort;
+  }
+
+  handleTimer(){
+    const parentThis = this;
+    let time = 100;
+    const tick = function(){
+      try {
+        console.log(parentThis.displayTimer);
+        const min = String(Math.trunc(time/60)).padStart(2,0);
+        const sec = String(Math.trunc(time%60)).padStart(2,0);
+        parentThis.displayTimer = `${min}:${sec}`;
+        if(time === 0){
+          const evt = new ShowToastEvent({
+            title : "Logging Out",
+            variant : "info",
+            message : "You have been logged out due to inactivity."
+          });
+          parentThis.handleLogOut(evt);
+        }
+        time--;
+      } catch (error) {
+        console.error(JSON.stringify(error.message), JSON.stringify(error.stack));
+      }
+    }
+    const logoutTimer = setInterval(tick, 1000);
+    return logoutTimer;
   }
 
   verifyCredentials(usrName, pwd){
