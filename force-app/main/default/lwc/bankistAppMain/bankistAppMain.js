@@ -398,6 +398,7 @@ export default class BankistAppMain extends LightningElement {
         console.error(JSON.stringify(error.message), JSON.stringify(error.stack));
       }
     }
+    tick();
     const logoutTimer = setInterval(tick, 1000);
     return logoutTimer;
   }
